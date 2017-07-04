@@ -1,0 +1,52 @@
+[
+ {
+ "id": 1,
+ "identifier": "bulbasaur",
+ "species_id": 1,
+ "height": 7,
+ "weight": 69,
+ "base_experience": 64,
+ "order": 1,
+ "is_default": 1
+ },
+ {
+ "id": 2,
+ "identifier": "ivysaur",
+ "species_id": 2,
+ "height": 10,
+ "weight": 130,
+ "base_experience": 142,
+ "order": 2,
+ "is_default": 1
+ },
+ {
+ "id": 3,
+ "identifier": "venusaur",
+ "species_id": 3,
+ "height": 20,
+ "weight": 1000,
+ "base_experience": 236,
+ "order": 3,
+ "is_default": 1
+ },
+ {
+ "id": 4,
+ "identifier": "charmander",
+ "species_id": 4,
+ "height": 6,
+ "weight": 85,
+ "base_experience": 62,
+ "order": 5,
+ "is_default": 1
+ },
+ {
+ "id": 5,
+ "identifier": "charmeleon",
+ "species_id": 5,
+ "height": 11,
+ "weight": 190,
+ "base_experience": 142,
+ "order": 6,
+ "is_default": 1
+ }
+ ]

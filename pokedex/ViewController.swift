@@ -20,21 +20,25 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var filteredPokemon = [Pokemon]() //for searchBar
     var inSearchMode = false // ^^
     var musicPlayer: AVAudioPlayer!
+    var j: UseJson!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collection.dataSource = self
         collection.delegate = self
         searchBar.delegate = self
         
         searchBar.returnKeyType = UIReturnKeyType.done
-
+        j = UseJson()
+        print("start")
+        j.readJson()  //yass
+        print("end")
+        
         parsePokemonCSV()
         initAudio()
     }
     
-    func initAudio() {
+    func initAudio() {    //can use main.url and wouldn't have to cast to URL in the next code (but this sig is diff)
         let path = Bundle.main.path(forResource: "music", ofType: "mp3")!
        
         do {
@@ -51,13 +55,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let path = Bundle.main.path(forResource: "pokemon", ofType: "csv")!
         do {
-            let csv = try CSV(contentsOfURL: path)
+            let csv = try CSV(contentsOfURL: path)  //from csv.swift file
             let rows = csv.rows
             print(rows)  //array of dictionaries, each row is a dictionary
             
             for row in rows {
-//                let name = row["identifier"]! //teacher this this way
-//                let id = Int(row["id"]!)!
                 if let name = row["identifier"], let id = Int(row["id"]!) {
                     let poke = Pokemon(name: name, pokedexId: id)
                     self.pokemon.append(poke)
@@ -94,8 +96,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
 
+    //made segue from VC to the view of the PokemonDetailVC, not from collection cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var poke: Pokemon!
         
+        if inSearchMode {
+            poke = filteredPokemon[indexPath.row]
+        } else {
+            poke = pokemon[indexPath.row]
+        }
+        
+        performSegue(withIdentifier: "pokemonDetailVC", sender: poke)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -145,6 +156,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 $0.name.range(of: lower) != nil
             })
             collection.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pokemonDetailVC" {
+            if let detailsVC = segue.destination as? PokemonDetailVC {
+                if let poke = sender as? Pokemon {
+                    detailsVC.poke = poke
+                }
+            }
         }
     }
 }
