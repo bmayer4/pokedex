@@ -14,7 +14,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var collection: UICollectionView!
     
     @IBOutlet weak var searchBar: UISearchBar!
-    //just added pods! :)
+
+    //just added pods! :))
+>>>>>>> firstbranch
     
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]() //for searchBar
