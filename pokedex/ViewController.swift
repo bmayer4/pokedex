@@ -29,9 +29,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         searchBar.delegate = self
         
         searchBar.returnKeyType = UIReturnKeyType.done
-        j = UseJson()
+        //j = UseJson()
         print("start")
-        j.readJson()  //yass
+        //j.readJson()  //yass
         print("end")
         
         parsePokemonCSV()
