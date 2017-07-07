@@ -15,6 +15,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    //FIXED issue with git
+    
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]() //for searchBar
     var inSearchMode = false // ^^
