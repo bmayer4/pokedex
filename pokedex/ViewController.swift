@@ -6,6 +6,9 @@
 //  Copyright © 2017 Devslopes. All rights reserved.
 //
 
+
+//**Project done but I would like to learn about segmented controls more
+
 import UIKit
 import AVFoundation
 
@@ -164,7 +167,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         if segue.identifier == "pokemonDetailVC" {
             if let detailsVC = segue.destination as? PokemonDetailVC {
                 if let poke = sender as? Pokemon {
-                    detailsVC.poke = poke
+                    detailsVC.pokemon = poke
                 }
             }
         }

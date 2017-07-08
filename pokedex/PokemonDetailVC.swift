@@ -10,11 +10,11 @@ import UIKit
 
 class PokemonDetailVC: UIViewController {
     
-    var poke: Pokemon!
+    var pokemon: Pokemon!
     
     @IBOutlet weak var nameLbl: UILabel!
     
-    @IBOutlet weak var miainIMG: UIImageView!
+    @IBOutlet weak var mainImg: UIImageView!
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var typeLbl: UILabel!
     @IBOutlet weak var defenseLbl: UILabel!
@@ -31,8 +31,40 @@ class PokemonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nameLbl.text = poke.name
+        nameLbl.text = pokemon.name.capitalized
+        
+        let img = UIImage(named: String(pokemon.pokedexId))
+        mainImg.image = img
+        currentEvoImg.image = img
+        
+        pokedexLbl.text = String(pokemon.pokedexId)
 
+        
+        pokemon.downloadPokemonDetail {
+            //Whatever we write will only be called after the network call is complete!
+            
+        self.updateUI()
+        }
+
+    }
+    
+    func updateUI() {
+        heightLbl.text = pokemon.height
+        weightLbl.text = pokemon.weight
+        attackLbl.text = pokemon.attack
+        defenseLbl.text = pokemon.defense
+        typeLbl.text = pokemon.type
+        descriptionLbl.text = pokemon.description
+        
+        if pokemon.nextEvolutionID == "" {
+            evoLbl.text = "No Evolutions"
+            nextEvoImg.isHidden = true  //stack views will recenter the remaining image :)
+        } else {
+            nextEvoImg.isHidden = false
+            nextEvoImg.image = UIImage(named: pokemon.nextEvolutionID)
+            let str = "Next Evolution: \(pokemon.nextEvolutionName) - LVL \(pokemon.nextEvolutionLevel)"
+            evoLbl.text = str
+        }
     }
     
     @IBAction func backBtnPressed(_ sender: UIButton) {
